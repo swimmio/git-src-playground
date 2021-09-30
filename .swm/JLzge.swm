@@ -40,7 +40,7 @@
             "firstLineNumber": 472,
             "path": "builtin/add.c",
             "comments": [
-                "And its implementation. We always add it in [[sym:./builtin(f42065b3-de47-4606-aa67-e3567a53ede6)]] folder."
+                "And its implementation. We always add it in [[sym:./builtin(f42065b3-de47-4606-aa67-e3567a53ede6)]] folder. Look at [[sym:./builtin/add.c(2485fa66-ccf2-44ce-83dc-bd11fe9db23c)]]"
             ]
         },
         {
@@ -93,6 +93,11 @@
             },
             "fileBlob": "18bed9a99647aa310ad37d4cd8dc683c66084b41",
             "type": "generic_text"
+        },
+        "2485fa66-ccf2-44ce-83dc-bd11fe9db23c": {
+            "type": "path",
+            "text": "builtin/add.c",
+            "path": "builtin/add.c"
         }
     },
     "file_version": "2.0.3",
