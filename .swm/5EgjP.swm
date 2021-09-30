@@ -1,0 +1,36 @@
+{
+    "id": "5EgjP",
+    "name": "Just another doc",
+    "content": [
+        {
+            "type": "text",
+            "text": "With something"
+        },
+        {
+            "type": "snippet",
+            "lines": [
+                "*#ifndef CHDIR_NOTIFY_H",
+                "*#define CHDIR_NOTIFY_H",
+                "*",
+                "*/*",
+                "* * An API to let code \"subscribe\" to changes to the current working directory.",
+                "  * The general idea is that some code asks to be notified when the working",
+                "  * directory changes, and other code that calls chdir uses a special wrapper",
+                "  * that notifies everyone."
+            ],
+            "firstLineNumber": 1,
+            "path": "chdir-notify.h",
+            "comments": [
+                "this snippet hasn't changed"
+            ]
+        }
+    ],
+    "symbols": {},
+    "file_version": "2.0.3",
+    "meta": {
+        "app_version": "0.5.9-1",
+        "file_blobs": {
+            "chdir-notify.h": "366e4c1ee9908c46ac59bcf6fe9668ea44066aef"
+        }
+    }
+}
