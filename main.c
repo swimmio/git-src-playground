@@ -486,7 +486,7 @@ static int run_builtin(struct cmd_struct *p, int argc, const char **argv)
 }
 
 static struct cmd_struct commands[] = {
-	{ "add", cmd_add, RUN_SETUP_GENTLY | NEED_WORK_TREE },
+	{ "add", cmd_add, RUN_SETUP | SUPPORT_SUPER_PREFIX | NEED_WORK_TREE },
 	{ "am", cmd_am, RUN_SETUP | NEED_WORK_TREE },
 	{ "annotate", cmd_annotate, RUN_SETUP | NO_PARSEOPT },
 	{ "apply", cmd_apply, RUN_SETUP_GENTLY },
