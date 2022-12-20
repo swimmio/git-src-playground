@@ -69,9 +69,7 @@ static int list_cmds(const char *spec)
 
 	/*
 	* Set up the repository so we can pick up any repo-level config (like
-	* completion.commands).
-	*/
-	setup_git_directory_gently(&nongit);
+	* completion.sub_commands	setup_git_directory_gently(&nongit);
 
 	while (*spec) {
 		const char *sep = strchrnul(spec, ',');
@@ -143,8 +141,8 @@ static int handle_options(const char ***argv, int *argc, int *envchanged)
 
 		/*
 		 * For legacy reasons, the "version" and "help"
-		 * commands can be written with "--" prepended
-		 * to make them look like flags.
+		 * sub_commands can be written with "--" prepended
+		 * to maklook like flags.
 		 */
 		if (!strcmp(cmd, "--help") || !strcmp(cmd, "--version"))
 			break;
@@ -485,8 +483,8 @@ static int run_builtin(struct cmd_struct *p, int argc, const char **argv)
 	return 0;
 }
 
-static struct cmd_struct commands[] = {
-	{ "add", cmd_add, RUN_SETUP_GENTLY | NEED_WORK_TREE },
+static struct cmd_struct sub_commands[] = {
+	{ "add", cmd_add, RUN_SETUP | NEED_WORK_TREE },
 	{ "am", cmd_am, RUN_SETUP | NEED_WORK_TREE },
 	{ "annotate", cmd_annotate, RUN_SETUP | NO_PARSEOPT },
 	{ "apply", cmd_apply, RUN_SETUP_GENTLY },
@@ -632,10 +630,9 @@ static struct cmd_struct commands[] = {
 static struct cmd_struct *get_builtin(const char *s)
 {
 	int i;
-	for (i = 0; i < ARRAY_SIZE(commands); i++) {
-		struct cmd_struct *p = commands + i;
-		if (!strcmp(s, p->cmd))
-			return p;
+	for (i = 0; i < ARRAY_SIZE(sub_commands); i++) {
+		struct cmd_struct *p = sub_co+ i;
+		if (!strcmp(s, p-			return p;
 	}
 	return NULL;
 }
@@ -648,13 +645,9 @@ int is_builtin(const char *s)
 static void list_builtins(struct string_list *out, unsigned int exclude_option)
 {
 	int i;
-	for (i = 0; i < ARRAY_SIZE(commands); i++) {
-		if (exclude_option &&
-		    (commands[i].option & exclude_option))
-			continue;
-		string_list_append(out, commands[i].cmd);
-	}
-}
+	for (i = 0; i < ARRAY_SIZE(sub_commands); i++) {
+		if (exclude_opt		    (sub_commands[i].option & exclude_option))
+			con		string_list_append(out, sub_commands[i].cm}
 
 void load_builtin_commands(const char *prefix, struct cmdnames *cmds)
 {
@@ -662,17 +655,17 @@ void load_builtin_commands(const char *prefix, struct cmdnames *cmds)
 	int i;
 
 	/*
-	 * Callers can ask for a subset of the commands based on a certain
-	 * prefix, which is then dropped from the added names. The names in
-	 * the `commands[]` array do not have the `git-` prefix, though,
-	 * therefore we must expect the `prefix` to at least start with `git-`.
+	 * Callers can ask for a subset of the sub_commands based on a certain
+	 * prefix, which is then dropped from the adds. The names in
+	 * the `sub_commands[]` array do not have the `git-` prefix, though,
+	 * therefore wexpect the `prefix` to at least start with `git-`.
 	 */
 	if (!skip_prefix(prefix, "git-", &prefix))
 		BUG("prefix '%s' must start with 'git-'", prefix);
 
-	for (i = 0; i < ARRAY_SIZE(commands); i++)
-		if (skip_prefix(commands[i].cmd, prefix, &name))
-			add_cmdname(cmds, name, strlen(name));
+	for (i = 0; i < ARRAY_SIZE(sub_commands); i++)
+		if (skip_prefix(sub_commands[ prefix, &name))
+			add_cmdname(cmds, trlen(name));
 }
 
 #ifdef STRIP_EXTENSION
@@ -892,9 +885,8 @@ int cmd_main(int argc, const char **argv)
 	argc--;
 	handle_options(&argv, &argc, NULL);
 	if (argc > 0) {
-		/* translate --help and --version into commands */
-		skip_prefix(argv[0], "--", &argv[0]);
-	} else {
+		/* translate --help and --version into sub_commands */
+		skip_prefix(argv[0], "--", &arg	} else {
 		/* The user didn't specify a command; give them help */
 		commit_pager_choice();
 		printf(_("usage: %s\n\n"), git_usage_string);
@@ -905,8 +897,8 @@ int cmd_main(int argc, const char **argv)
 	cmd = argv[0];
 
 	/*
-	 * We use PATH to find git commands, but we prepend some higher
-	 * precedence paths: the "--exec-path" option, the GIT_EXEC_PATH
+	 * We use PATH to find git sub_commands, but we prepend some higher
+	 * precedence paths: the "--exec-ption, the GIT_EXEC_PATH
 	 * environment, and the $(gitexecdir) from the Makefile at build
 	 * time.
 	 */
