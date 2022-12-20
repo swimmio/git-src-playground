@@ -18,8 +18,6 @@ In this document, we will learn how to add a command to Git's CLI.
 
 Git subcommands are standalone executables that live in the Git exec path, normally `/usr/lib/git-core`. The `git` executable itself is a thin wrapper that knows where the subcommands live, and runs them by passing command-line arguments to them.
 
-<br/>
-
 # Adding a new command
 
 <br/>
@@ -129,27 +127,24 @@ In `📄 command-list.txt` we categorize commands by type, so they can be listed
 
 The implementation commands take three parameters: `argc`[<sup id="Z2uPrig">↓</sup>](#f-Z2uPrig), `argv`[<sup id="Z2bCEPR">↓</sup>](#f-Z2bCEPR), and `prefix`[<sup id="2bcG0g">↓</sup>](#f-2bcG0g). The first two are similar to what `main()` of a standalone command would be called with.
 
-When `RUN_SETUP`[<sup id="Z1BE9pN">↓</sup>](#f-Z1BE9pN) is specified in the `commands[]`[<sup id="Z1wOyO">↓</sup>](#f-Z1wOyO) table, and when you were started from a subdirectory of the work tree, your new command (e.g., `cmd_add`[<sup id="Olher">↓</sup>](#f-Olher)) is called after `chdir` to the top of the work tree, and `prefix`[<sup id="Z2sEcOl">↓</sup>](#f-Z2sEcOl) gets the path to the subdirectory the command started from. This allows you to convert a user-supplied pathname (typically relative to that directory) to a pathname relative to the top of the work tree.
+When `RUN_SETUP`[<sup id="Z1BE9pN">↓</sup>](#f-Z1BE9pN) is specified in the `commands`[<sup id="ZAY7QK">↓</sup>](#f-ZAY7QK) table, and when you were started from a subdirectory of the work tree, your new command (e.g., `cmd_add`[<sup id="Olher">↓</sup>](#f-Olher) is called after `chdir` to the top of the work tree, and `prefix`[<sup id="Z2sEcOl">↓</sup>](#f-Z2sEcOl) gets the path to the subdirectory the command started from. This allows you to convert a user-supplied pathname (typically relative to that directory) to a pathname relative to the top of the work tree.
 
 The return value from the function becomes the exit status of the command.
-
-<br/>
 
 <br/>
 
 <!--MERMAID {width:100}-->
 ```mermaid
 sequenceDiagram
-    User Interface->>+Git CLI: git add
-    Git CLI->>+User Interface: John, can you hear me?
-    Git CLI-->>chdir: If RUN_SETUP in commands
-    chdir-->>Git CLI: 
-    Note right of Git CLI: prefix gets the path to the subdir
-    Git CLI->>Command (add): prefix 
-    Command (add)->>Git CLI: return exit_status
-    Git CLI->>+User Interface: return code
+User Interface->>+Git CLI: git add
+Git CLI->>+User Interface: John, can you hear me?
+Git CLI-->>chdir: If RUN_SETUP in commands
+chdir-->>Git CLI: set prefix to the path to the subdir
+Git CLI->>Command (add): prefix
+Command (add)->>Git CLI: return exit_status
+Git CLI->>+User Interface: return code
 ```
-<!--MCONTENT {content: "sequenceDiagram<br/>\nUser Interface->>+Git CLI: git `add`[<sup id=\"ZY0bfT\">↓</sup>](#f-ZY0bfT)<br/>\nGit CLI->>+User Interface: John, can you hear me?<br/>\nGit CLI\\-\\-\\>>chdir: If `RUN_SETUP`[<sup id=\"Z1BE9pN\">↓</sup>](#f-Z1BE9pN) in `commands`[<sup id=\"ZAY7QK\">↓</sup>](#f-ZAY7QK)<br/>\nchdir\\-\\-\\>>Git CLI:<br/>\nNote right of Git CLI: `prefix`[<sup id=\"2bcG0g\">↓</sup>](#f-2bcG0g) gets the path to the subdir<br/>\nGit CLI->>Command (add): `prefix`[<sup id=\"2bcG0g\">↓</sup>](#f-2bcG0g)<br/>\nCommand (add)->>Git CLI: return `exit_status`[<sup id=\"25O6Qg\">↓</sup>](#f-25O6Qg)<br/>\nGit CLI->>+User Interface: return code"} --->
+<!--MCONTENT {content: "sequenceDiagram<br/>\nUser Interface->>+Git CLI: git `add`[<sup id=\"ZY0bfT\">↓</sup>](#f-ZY0bfT)<br/>\nGit CLI->>+User Interface: John, can you hear me?<br/>\nGit CLI\\-\\-\\>>chdir: If `RUN_SETUP`[<sup id=\"Z1BE9pN\">↓</sup>](#f-Z1BE9pN) in `commands`[<sup id=\"ZAY7QK\">↓</sup>](#f-ZAY7QK)<br/>\nchdir\\-\\-\\>>Git CLI: set `prefix`[<sup id=\"2bcG0g\">↓</sup>](#f-2bcG0g) to the path to the subdir<br/>\nGit CLI->>Command (add): `prefix`[<sup id=\"2bcG0g\">↓</sup>](#f-2bcG0g)<br/>\nCommand (add)->>Git CLI: return `exit_status`[<sup id=\"25O6Qg\">↓</sup>](#f-25O6Qg)<br/>\nGit CLI->>+User Interface: return code"} --->
 
 <br/>
 
@@ -192,11 +187,6 @@ static struct cmd_struct commands[] = {
 ```
 
 <span id="f-ZAY7QK">commands</span>[^](#ZAY7QK) - "git.c" L484
-```c
-static struct cmd_struct commands[] = {
-```
-
-<span id="f-Z1wOyO">commands[]</span>[^](#Z1wOyO) - "git.c" L484
 ```c
 static struct cmd_struct commands[] = {
 ```
