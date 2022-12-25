@@ -73,7 +73,7 @@ To make Git “aware” of the `add`<swm-token data-swm-token=":git.c:485:4:4:`	
 
 <br/>
 
-This is the array of commands as can be seen in \[\[sym-text:commands\]\]
+This is the array of commands as can be seen in smartext
 
 <br/>
 
