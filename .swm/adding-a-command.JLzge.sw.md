@@ -2,7 +2,7 @@
 id: JLzge
 name: Adding a command
 file_version: 1.1.0
-app_version: 0.10.2
+app_version: 0.11.0
 file_blobs:
   my_builtin/add.c: 17528e8f922693e2ec99aa66f3d761a3b83fcf35
   builtin.h: 16ecd5586f0beeae1e65efb06f25836723d8f4e9
@@ -24,7 +24,7 @@ Git subcommands are standalone executables that live in the Git exec path, norma
 
 Every command has a file with a corresponding name, within the `📄 my_builtin` folder.
 
-This file includes the definition of the command (in this case `cmd_add`<swm-token data-swm-token=":my_builtin/add.c:475:2:2:`int cmd_add(int argc, const char **argv, const char *prefix)`"/>:
+This file includes the definition of the command (in this case `cmd_add`<swm-token data-swm-token=":my_builtin/add.c:475:2:2:`int&#32;cmd_add&#40;int&#32;argc,&#32;const&#32;char&#32;**argv,&#32;const&#32;char&#32;*prefix&#41;`"/>:
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 my_builtin/add.c
 ```c
@@ -57,7 +57,7 @@ The function must be declared within `📄 builtin.h`:
 
 <br/>
 
-To make Git “aware” of the `add`<swm-token data-swm-token=":git.c:485:4:4:`	{ &quot;add&quot;, cmd_add, RUN_SETUP | NEED_WORK_TREE },`"/> command, it needs to be registered by adding a `cmd_struct`<swm-token data-swm-token=":git.c:484:4:4:`static struct cmd_struct commands[] = {`"/> to the `commands`<swm-token data-swm-token=":git.c:484:6:6:`static struct cmd_struct commands[] = {`"/> array:
+To make Git “aware” of the `add`<swm-token data-swm-token=":git.c:485:4:4:`	&#123;&#32;&quot;add&quot;,&#32;cmd_add,&#32;RUN_SETUP&#32;|&#32;NEED_WORK_TREE&#32;&#125;,`"/> command, it needs to be registered by adding a `cmd_struct`<swm-token data-swm-token=":git.c:484:4:4:`static&#32;struct&#32;cmd_struct&#32;commands&#91;&#93;&#32;=&#32;&#123;`"/> to the `commands`<swm-token data-swm-token=":git.c:484:6:6:`static&#32;struct&#32;cmd_struct&#32;commands&#91;&#93;&#32;=&#32;&#123;`"/> array:
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 git.c
 ```c
@@ -73,11 +73,11 @@ To make Git “aware” of the `add`<swm-token data-swm-token=":git.c:485:4:4:`	
 
 <br/>
 
-This is the array of commands `commands[]`<swm-token data-swm-token=":git.c:484:6:8:`static struct cmd_struct commands[] = {`"/>
+This is the array of commands `commands&#91;&#93;`<swm-token data-swm-token=":git.c:484:6:8:`static&#32;struct&#32;cmd_struct&#32;commands&#91;&#93;&#32;=&#32;&#123;`"/>
 
 <br/>
 
-Also, in order to be able to build the project, we must add our command into the `BUILTIN_OBJS`<swm-token data-swm-token=":Makefile:1063:0:0:`BUILTIN_OBJS += builtin/add.o`"/> within the `📄 Makefile`:
+Also, in order to be able to build the project, we must add our command into the `BUILTIN_OBJS`<swm-token data-swm-token=":Makefile:1063:0:0:`BUILTIN_OBJS&#32;+=&#32;builtin/add.o`"/> within the `📄 Makefile`:
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Makefile
 ```
@@ -94,7 +94,7 @@ You must have a test, written to report in TAP (Test Anything Protocol). Tests a
 
 <br/>
 
-This is an example of a test for the `cmd_add`<swm-token data-swm-token=":builtin.h:114:2:2:`int cmd_add(int argc, const char **argv, const char *prefix);`"/> command:
+This is an example of a test for the `cmd_add`<swm-token data-swm-token=":builtin.h:114:2:2:`int&#32;cmd_add&#40;int&#32;argc,&#32;const&#32;char&#32;**argv,&#32;const&#32;char&#32;*prefix&#41;;`"/> command:
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 t/t3700-add.sh
 ```shell
@@ -125,9 +125,9 @@ In `📄 command-list.txt` we categorize commands by type, so they can be listed
 
 # How your new command is called
 
-The implementation commands take three parameters: `argc`<swm-token data-swm-token=":my_builtin/add.c:475:6:6:`int cmd_add(int argc, const char **argv, const char *prefix)`"/>, `argv`<swm-token data-swm-token=":builtin.h:114:14:14:`int cmd_add(int argc, const char **argv, const char *prefix);`"/>, and `prefix`<swm-token data-swm-token=":builtin.h:114:22:22:`int cmd_add(int argc, const char **argv, const char *prefix);`"/>. The first two are similar to what `main()` of a standalone command would be called with.
+The implementation commands take three parameters: `argc`<swm-token data-swm-token=":my_builtin/add.c:475:6:6:`int&#32;cmd_add&#40;int&#32;argc,&#32;const&#32;char&#32;**argv,&#32;const&#32;char&#32;*prefix&#41;`"/>, `argv`<swm-token data-swm-token=":builtin.h:114:14:14:`int&#32;cmd_add&#40;int&#32;argc,&#32;const&#32;char&#32;**argv,&#32;const&#32;char&#32;*prefix&#41;;`"/>, and `prefix`<swm-token data-swm-token=":builtin.h:114:22:22:`int&#32;cmd_add&#40;int&#32;argc,&#32;const&#32;char&#32;**argv,&#32;const&#32;char&#32;*prefix&#41;;`"/>. The first two are similar to what `main()` of a standalone command would be called with.
 
-When `RUN_SETUP`<swm-token data-swm-token=":git.c:485:11:11:`	{ &quot;add&quot;, cmd_add, RUN_SETUP | NEED_WORK_TREE },`"/> is specified in the `commands`<swm-token data-swm-token=":git.c:484:6:6:`static struct cmd_struct commands[] = {`"/> table, and when you were started from a subdirectory of the work tree, your new command (e.g., `cmd_add`<swm-token data-swm-token=":builtin.h:114:2:2:`int cmd_add(int argc, const char **argv, const char *prefix);`"/> is called after `chdir` to the top of the work tree, and `prefix`<swm-token data-swm-token=":my_builtin/add.c:475:22:22:`int cmd_add(int argc, const char **argv, const char *prefix)`"/> gets the path to the subdirectory the command started from. This allows you to convert a user-supplied pathname (typically relative to that directory) to a pathname relative to the top of the work tree.
+When `RUN_SETUP`<swm-token data-swm-token=":git.c:485:11:11:`	&#123;&#32;&quot;add&quot;,&#32;cmd_add,&#32;RUN_SETUP&#32;|&#32;NEED_WORK_TREE&#32;&#125;,`"/> is specified in the `commands`<swm-token data-swm-token=":git.c:484:6:6:`static&#32;struct&#32;cmd_struct&#32;commands&#91;&#93;&#32;=&#32;&#123;`"/> table, and when you were started from a subdirectory of the work tree, your new command (e.g., `cmd_add`<swm-token data-swm-token=":builtin.h:114:2:2:`int&#32;cmd_add&#40;int&#32;argc,&#32;const&#32;char&#32;**argv,&#32;const&#32;char&#32;*prefix&#41;;`"/> is called after `chdir` to the top of the work tree, and `prefix`<swm-token data-swm-token=":my_builtin/add.c:475:22:22:`int&#32;cmd_add&#40;int&#32;argc,&#32;const&#32;char&#32;**argv,&#32;const&#32;char&#32;*prefix&#41;`"/> gets the path to the subdirectory the command started from. This allows you to convert a user-supplied pathname (typically relative to that directory) to a pathname relative to the top of the work tree.
 
 The return value from the function becomes the exit status of the command.
 
@@ -136,21 +136,21 @@ The return value from the function becomes the exit status of the command.
 <!--MERMAID {width:100}-->
 ```mermaid
 sequenceDiagram
-User Interface->>+Git CLI: git add
+User Interface->>+Git CLI: git `add`
 Git CLI->>+User Interface: John, can you hear me?
-Git CLI-->>chdir: If RUN_SETUP in commands
-chdir-->>Git CLI: set prefix to the path to the subdir
-Git CLI->>Command (add): prefix
-Command (add)->>Git CLI: return exit_status
+Git CLI-->>chdir: If `RUN_SETUP` in `commands`
+chdir-->>Git CLI: set `prefix` to the path to the subdir
+Git CLI->>Command (add): `prefix`
+Command (add)->>Git CLI: return `exit_status`
 Git CLI->>+User Interface: return code
 ```
 <!--MCONTENT {content: sequenceDiagram<br/>
-User Interface->>+Git CLI: git `add`<swm-token data-swm-token=":git.c:485:4:4:`	{ &quot;add&quot;, cmd_add, RUN_SETUP | NEED_WORK_TREE },`"/><br/>
+User Interface->>+Git CLI: git `add`<swm-token data-swm-token=":git.c:485:4:4:`	&#123;&#32;&quot;add&quot;,&#32;cmd_add,&#32;RUN_SETUP&#32;|&#32;NEED_WORK_TREE&#32;&#125;,`"/><br/>
 Git CLI->>+User Interface: John, can you hear me?<br/>
-Git CLI\-\-\>>chdir: If `RUN_SETUP`<swm-token data-swm-token=":git.c:485:11:11:`	{ &quot;add&quot;, cmd_add, RUN_SETUP | NEED_WORK_TREE },`"/> in `commands`<swm-token data-swm-token=":git.c:484:6:6:`static struct cmd_struct commands[] = {`"/><br/>
-chdir\-\-\>>Git CLI: set `prefix`<swm-token data-swm-token=":builtin.h:114:22:22:`int cmd_add(int argc, const char **argv, const char *prefix);`"/> to the path to the subdir<br/>
-Git CLI->>Command (add): `prefix`<swm-token data-swm-token=":builtin.h:114:22:22:`int cmd_add(int argc, const char **argv, const char *prefix);`"/><br/>
-Command (add)->>Git CLI: return `exit_status`<swm-token data-swm-token=":my_builtin/add.c:472:3:3:`	return exit_status;`"/><br/>
+Git CLI\-\-\>>chdir: If `RUN_SETUP`<swm-token data-swm-token=":git.c:485:11:11:`	&#123;&#32;&quot;add&quot;,&#32;cmd_add,&#32;RUN_SETUP&#32;|&#32;NEED_WORK_TREE&#32;&#125;,`"/> in `commands`<swm-token data-swm-token=":git.c:484:6:6:`static&#32;struct&#32;cmd_struct&#32;commands&#91;&#93;&#32;=&#32;&#123;`"/><br/>
+chdir\-\-\>>Git CLI: set `prefix`<swm-token data-swm-token=":builtin.h:114:22:22:`int&#32;cmd_add&#40;int&#32;argc,&#32;const&#32;char&#32;**argv,&#32;const&#32;char&#32;*prefix&#41;;`"/> to the path to the subdir<br/>
+Git CLI->>Command (add): `prefix`<swm-token data-swm-token=":builtin.h:114:22:22:`int&#32;cmd_add&#40;int&#32;argc,&#32;const&#32;char&#32;**argv,&#32;const&#32;char&#32;*prefix&#41;;`"/><br/>
+Command (add)->>Git CLI: return `exit_status`<swm-token data-swm-token=":my_builtin/add.c:472:3:3:`	return&#32;exit_status;`"/><br/>
 Git CLI->>+User Interface: return code} --->
 
 <br/>
