@@ -73,7 +73,7 @@ To make Git “aware” of the `add`<swm-token data-swm-token=":git.c:485:4:4:`	
 
 <br/>
 
-This is the array of commands HERE
+This is the array of commands `commands[]`<swm-token data-swm-token=":git.c:484:6:8:`static struct cmd_struct commands[] = {`"/>
 
 <br/>
 
