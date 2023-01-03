@@ -137,14 +137,13 @@ The return value from the function becomes the exit status of the command.
 ```mermaid
 sequenceDiagram
 User Interface->>+Git CLI: git add
-Git CLI->>+User Interface: John, can you hear me?
 Git CLI-->>chdir: If RUN_SETUP in commands
 chdir-->>Git CLI: set prefix to the path to the subdir
 Git CLI->>Command (add): prefix
 Command (add)->>Git CLI: return exit_status
 Git CLI->>+User Interface: return code
 ```
-<!--MCONTENT {content: "sequenceDiagram<br/>\nUser Interface->>+Git CLI: git `add`[<sup id=\"ZY0bfT\">↓</sup>](#f-ZY0bfT)<br/>\nGit CLI->>+User Interface: John, can you hear me?<br/>\nGit CLI\\-\\-\\>>chdir: If `RUN_SETUP`[<sup id=\"Z1BE9pN\">↓</sup>](#f-Z1BE9pN) in `commands`[<sup id=\"ZAY7QK\">↓</sup>](#f-ZAY7QK)<br/>\nchdir\\-\\-\\>>Git CLI: set `prefix`[<sup id=\"2bcG0g\">↓</sup>](#f-2bcG0g) to the path to the subdir<br/>\nGit CLI->>Command (add): `prefix`[<sup id=\"2bcG0g\">↓</sup>](#f-2bcG0g)<br/>\nCommand (add)->>Git CLI: return `exit_status`[<sup id=\"25O6Qg\">↓</sup>](#f-25O6Qg)<br/>\nGit CLI->>+User Interface: return code"} --->
+<!--MCONTENT {content: "sequenceDiagram<br/>\nUser Interface->>+Git CLI: git `add`[<sup id=\"ZY0bfT\">↓</sup>](#f-ZY0bfT)<br/>\nGit CLI\\-\\-\\>>chdir: If `RUN_SETUP`[<sup id=\"Z1BE9pN\">↓</sup>](#f-Z1BE9pN) in `commands`[<sup id=\"ZAY7QK\">↓</sup>](#f-ZAY7QK)<br/>\nchdir\\-\\-\\>>Git CLI: set `prefix`[<sup id=\"2bcG0g\">↓</sup>](#f-2bcG0g) to the path to the subdir<br/>\nGit CLI->>Command (add): `prefix`[<sup id=\"2bcG0g\">↓</sup>](#f-2bcG0g)<br/>\nCommand (add)->>Git CLI: return `exit_status`[<sup id=\"25O6Qg\">↓</sup>](#f-25O6Qg)<br/>\nGit CLI->>+User Interface: return code"} --->
 
 <br/>
 
