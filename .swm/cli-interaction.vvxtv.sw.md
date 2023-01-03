@@ -15,7 +15,7 @@ In this document, we will learn how data is sent to and from Git's CLI.
 
 <br/>
 
-The git commands must be declared within `📄 builtin.h`:
+The git commands must be declared within `📄 builtin.h`, for example:
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 builtin.h
 ```c
@@ -23,9 +23,15 @@ The git commands must be declared within `📄 builtin.h`:
 ⬜ 112    int is_builtin(const char *s);
 ⬜ 113    
 🟩 114    int cmd_add(int argc, const char **argv, const char *prefix);
-⬜ 115    int cmd_am(int argc, const char **argv, const char *prefix);
-⬜ 116    int cmd_annotate(int argc, const char **argv, const char *prefix);
-⬜ 117    int cmd_apply(int argc, const char **argv, const char *prefix);
+🟩 115    int cmd_am(int argc, const char **argv, const char *prefix);
+🟩 116    int cmd_annotate(int argc, const char **argv, const char *prefix);
+🟩 117    int cmd_apply(int argc, const char **argv, const char *prefix);
+🟩 118    int cmd_archive(int argc, const char **argv, const char *prefix);
+🟩 119    int cmd_bisect__helper(int argc, const char **argv, const char *prefix);
+🟩 120    int cmd_blame(int argc, const char **argv, const char *prefix);
+⬜ 121    int cmd_branch(int argc, const char **argv, const char *prefix);
+⬜ 122    int cmd_bugreport(int argc, const char **argv, const char *prefix);
+⬜ 123    int cmd_bundle(int argc, const char **argv, const char *prefix);
 ```
 
 <br/>
