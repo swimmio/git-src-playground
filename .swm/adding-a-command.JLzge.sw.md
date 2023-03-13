@@ -1,22 +1,15 @@
 ---
 id: JLzge
-name: Adding a command
-file_version: 1.1.0
-app_version: 0.10.2
-file_blobs:
-  my_builtin/add.c: 17528e8f922693e2ec99aa66f3d761a3b83fcf35
-  builtin.h: 16ecd5586f0beeae1e65efb06f25836723d8f4e9
-  git.c: 18bed9a99647aa310ad37d4cd8dc683c66084b41
-  Makefile: d1feab008fceb3540159532f16ae0584ff3926d6
-  t/t3700-add.sh: 4086e1ebbc97f1220669a2a3236b255b6c20ce95
-  command-list.txt: a289f09ed6fbf9a117468ae69c7ee2e8ab48f0a8
+title: Adding a command
+file_version: 1.1.2
+app_version: 1.4.2
 ---
 
 In this document, we will learn how to add a command to Git's CLI.
 
 # Runtime Environment
 
-Git subcommands are standalone executables that live in the Git exec path, normally `/usr/lib/git-core`. The `git` executable itself is a thin wrapper that knows where the subcommands live, and runs them by passing command-line arguments to them.
+Git subcommands are standalone executables that live in the Git exec path, normally `/usr/lib/git-core`. The `git` **executable** itself is a thin wrapper that knows where the subcommands live, and runs them by passing command-line arguments to them.
 
 # Adding a new command
 
@@ -28,16 +21,10 @@ This file includes the definition of the command (in this case `cmd_add`<swm-tok
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 my_builtin/add.c
 ```c
-⬜ 472    	return exit_status;
-⬜ 473    }
-⬜ 474    
-🟩 475    int cmd_add(int argc, const char **argv, const char *prefix)
-🟩 476    {
-🟩 477    	int exit_status = 0;
-🟩 478    	struct pathspec pathspec;
-⬜ 479    	struct dir_struct dir = DIR_INIT;
-⬜ 480    	int flags;
-⬜ 481    	int add_new_files;
+475    int cmd_add(int argc, const char **argv, const char *prefix)
+476    {
+477    	int exit_status = 0;
+478    	struct pathspec pathspec;
 ```
 
 <br/>
@@ -46,13 +33,7 @@ The function must be declared within `📄 builtin.h`:
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 builtin.h
 ```c
-⬜ 111    
-⬜ 112    int is_builtin(const char *s);
-⬜ 113    
-🟩 114    int cmd_add(int argc, const char **argv, const char *prefix);
-⬜ 115    int cmd_am(int argc, const char **argv, const char *prefix);
-⬜ 116    int cmd_annotate(int argc, const char **argv, const char *prefix);
-⬜ 117    int cmd_apply(int argc, const char **argv, const char *prefix);
+114    int cmd_add(int argc, const char **argv, const char *prefix);
 ```
 
 <br/>
@@ -61,14 +42,8 @@ To make Git “aware” of the `add`<swm-token data-swm-token=":git.c:485:4:4:`	
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 git.c
 ```c
-⬜ 481    	return 0;
-⬜ 482    }
-⬜ 483    
-🟩 484    static struct cmd_struct commands[] = {
-🟩 485    	{ "add", cmd_add, RUN_SETUP | NEED_WORK_TREE },
-⬜ 486    	{ "am", cmd_am, RUN_SETUP | NEED_WORK_TREE },
-⬜ 487    	{ "annotate", cmd_annotate, RUN_SETUP | NO_PARSEOPT },
-⬜ 488    	{ "apply", cmd_apply, RUN_SETUP_GENTLY },
+484    static struct cmd_struct commands[] = {
+485    	{ "add", cmd_add, RUN_SETUP | NEED_WORK_TREE },
 ```
 
 <br/>
@@ -81,7 +56,7 @@ Also, in order to be able to build the project, we must add our command into the
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Makefile
 ```
-🟩 1063   BUILTIN_OBJS += builtin/add.o
+1063   BUILTIN_OBJS += builtin/add.o
 ```
 
 <br/>
@@ -98,13 +73,13 @@ This is an example of a test for the `cmd_add`<swm-token data-swm-token=":builti
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 t/t3700-add.sh
 ```shell
-🟩 429    test_expect_success 'no file status change if no pathspec is given' '
-🟩 430    	>foo5 &&
-🟩 431    	>foo6 &&
-🟩 432    	git add foo5 foo6 &&
-🟩 433    	git add --chmod=+x &&
-🟩 434    	test_mode_in_index 100644 foo5 &&
-🟩 435    	test_mode_in_index 100644 foo6
+429    test_expect_success 'no file status change if no pathspec is given' '
+430    	>foo5 &&
+431    	>foo6 &&
+432    	git add foo5 foo6 &&
+433    	git add --chmod=+x &&
+434    	test_mode_in_index 100644 foo5 &&
+435    	test_mode_in_index 100644 foo6
 ```
 
 <br/>
@@ -117,8 +92,8 @@ In `📄 command-list.txt` we categorize commands by type, so they can be listed
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 command-list.txt
 ```text
-🟩 47     # command name                          category [category] [category]
-🟩 48     git-add                                 mainporcelain           worktree
+47     # command name                          category [category] [category]
+48     git-add                                 mainporcelain           worktree
 ```
 
 <br/>
@@ -136,23 +111,16 @@ The return value from the function becomes the exit status of the command.
 <!--MERMAID {width:100}-->
 ```mermaid
 sequenceDiagram
-User Interface->>+Git CLI: git add
+User Interface->>+Git CLI: git `add`
 Git CLI->>+User Interface: John, can you hear me?
-Git CLI-->>chdir: If RUN_SETUP in commands
-chdir-->>Git CLI: set prefix to the path to the subdir
-Git CLI->>Command (add): prefix
-Command (add)->>Git CLI: return exit_status
+Git CLI-->>chdir: If `RUN_SETUP` in `commands`
+chdir-->>Git CLI: set `prefix` to the path to the subdir
+Git CLI->>Command (add): `prefix`
+Command (add)->>Git CLI: return `exit_status`
 Git CLI->>+User Interface: return code
 ```
-<!--MCONTENT {content: sequenceDiagram<br/>
-User Interface->>+Git CLI: git `add`<swm-token data-swm-token=":git.c:485:4:4:`	{ &quot;add&quot;, cmd_add, RUN_SETUP | NEED_WORK_TREE },`"/><br/>
-Git CLI->>+User Interface: John, can you hear me?<br/>
-Git CLI\-\-\>>chdir: If `RUN_SETUP`<swm-token data-swm-token=":git.c:485:11:11:`	{ &quot;add&quot;, cmd_add, RUN_SETUP | NEED_WORK_TREE },`"/> in `commands`<swm-token data-swm-token=":git.c:484:6:6:`static struct cmd_struct commands[] = {`"/><br/>
-chdir\-\-\>>Git CLI: set `prefix`<swm-token data-swm-token=":builtin.h:114:22:22:`int cmd_add(int argc, const char **argv, const char *prefix);`"/> to the path to the subdir<br/>
-Git CLI->>Command (add): `prefix`<swm-token data-swm-token=":builtin.h:114:22:22:`int cmd_add(int argc, const char **argv, const char *prefix);`"/><br/>
-Command (add)->>Git CLI: return `exit_status`<swm-token data-swm-token=":my_builtin/add.c:472:3:3:`	return exit_status;`"/><br/>
-Git CLI->>+User Interface: return code} --->
+<!--MCONTENT {content: "sequenceDiagram<br/>\nUser Interface->>+Git CLI: git `add`<swm-token data-swm-token=\":git.c:485:4:4:`\t{ &quot;add&quot;, cmd_add, RUN_SETUP | NEED_WORK_TREE },`\"/><br/>\nGit CLI->>+User Interface: John, can you hear me?<br/>\nGit CLI\\-\\-\\>>chdir: If `RUN_SETUP`<swm-token data-swm-token=\":git.c:485:11:11:`\t{ &quot;add&quot;, cmd_add, RUN_SETUP | NEED_WORK_TREE },`\"/> in `commands`<swm-token data-swm-token=\":git.c:484:6:6:`static struct cmd_struct commands[] = {`\"/><br/>\nchdir\\-\\-\\>>Git CLI: set `prefix`<swm-token data-swm-token=\":builtin.h:114:22:22:`int cmd_add(int argc, const char **argv, const char *prefix);`\"/> to the path to the subdir<br/>\nGit CLI->>Command (add): `prefix`<swm-token data-swm-token=\":builtin.h:114:22:22:`int cmd_add(int argc, const char **argv, const char *prefix);`\"/><br/>\nCommand (add)->>Git CLI: return `exit_status`<swm-token data-swm-token=\":my_builtin/add.c:472:3:3:`\treturn exit_status;`\"/><br/>\nGit CLI->>+User Interface: return code"} --->
 
 <br/>
 
-This file was generated by Swimm. [Click here to view it in the app](https://swimm-web-app.web.app/repos/Z2l0aHViJTNBJTNBZ2l0LXNyYy1wbGF5Z3JvdW5kJTNBJTNBT21lclJvc2VuYmF1bQ==/docs/JLzge).
+This file was generated by Swimm. [Click here to view it in the app](/repos/Z2l0aHViJTNBJTNBZ2l0LXNyYy1wbGF5Z3JvdW5kJTNBJTNBT21lclJvc2VuYmF1bQ==/docs/JLzge).
