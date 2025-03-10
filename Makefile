@@ -573,7 +573,6 @@ export TCL_PATH TCLTK_PATH
 PTHREAD_LIBS = -lpthread
 
 # Guard against environment variables
-BUILTIN_OBJS =
 BUILT_INS =
 COMPAT_CFLAGS =
 COMPAT_OBJS =
@@ -775,7 +774,7 @@ TEST_PROGRAMS = $(patsubst %,t/helper/%$X,$(TEST_PROGRAMS_NEED_X))
 
 # List built-in command $C whose implementation cmd_$C() is not in
 # builtin/$C.o but is linked in as part of some other command.
-BUILT_INS += $(patsubst builtin/%.o,git-%$X,$(BUILTIN_OBJS))
+BUILT_INS += $(patsubst builtin/%.o,git-%$X)
 
 BUILT_INS += git-cherry$X
 BUILT_INS += git-cherry-pick$X
@@ -1060,126 +1059,6 @@ LIB_OBJS += wt-status.o
 LIB_OBJS += xdiff-interface.o
 LIB_OBJS += zlib.o
 
-BUILTIN_OBJS += builtin/add.o
-BUILTIN_OBJS += builtin/am.o
-BUILTIN_OBJS += builtin/annotate.o
-BUILTIN_OBJS += builtin/apply.o
-BUILTIN_OBJS += builtin/archive.o
-BUILTIN_OBJS += builtin/bisect--helper.o
-BUILTIN_OBJS += builtin/blame.o
-BUILTIN_OBJS += builtin/branch.o
-BUILTIN_OBJS += builtin/bugreport.o
-BUILTIN_OBJS += builtin/bundle.o
-BUILTIN_OBJS += builtin/cat-file.o
-BUILTIN_OBJS += builtin/check-attr.o
-BUILTIN_OBJS += builtin/check-ignore.o
-BUILTIN_OBJS += builtin/check-mailmap.o
-BUILTIN_OBJS += builtin/check-ref-format.o
-BUILTIN_OBJS += builtin/checkout--worker.o
-BUILTIN_OBJS += builtin/checkout-index.o
-BUILTIN_OBJS += builtin/checkout.o
-BUILTIN_OBJS += builtin/clean.o
-BUILTIN_OBJS += builtin/clone.o
-BUILTIN_OBJS += builtin/column.o
-BUILTIN_OBJS += builtin/commit-graph.o
-BUILTIN_OBJS += builtin/commit-tree.o
-BUILTIN_OBJS += builtin/commit.o
-BUILTIN_OBJS += builtin/config.o
-BUILTIN_OBJS += builtin/count-objects.o
-BUILTIN_OBJS += builtin/credential-cache--daemon.o
-BUILTIN_OBJS += builtin/credential-cache.o
-BUILTIN_OBJS += builtin/credential-store.o
-BUILTIN_OBJS += builtin/credential.o
-BUILTIN_OBJS += builtin/describe.o
-BUILTIN_OBJS += builtin/diff-files.o
-BUILTIN_OBJS += builtin/diff-index.o
-BUILTIN_OBJS += builtin/diff-tree.o
-BUILTIN_OBJS += builtin/diff.o
-BUILTIN_OBJS += builtin/difftool.o
-BUILTIN_OBJS += builtin/env--helper.o
-BUILTIN_OBJS += builtin/fast-export.o
-BUILTIN_OBJS += builtin/fast-import.o
-BUILTIN_OBJS += builtin/fetch-pack.o
-BUILTIN_OBJS += builtin/fetch.o
-BUILTIN_OBJS += builtin/fmt-merge-msg.o
-BUILTIN_OBJS += builtin/for-each-ref.o
-BUILTIN_OBJS += builtin/for-each-repo.o
-BUILTIN_OBJS += builtin/fsck.o
-BUILTIN_OBJS += builtin/gc.o
-BUILTIN_OBJS += builtin/get-tar-commit-id.o
-BUILTIN_OBJS += builtin/grep.o
-BUILTIN_OBJS += builtin/hash-object.o
-BUILTIN_OBJS += builtin/help.o
-BUILTIN_OBJS += builtin/index-pack.o
-BUILTIN_OBJS += builtin/init-db.o
-BUILTIN_OBJS += builtin/interpret-trailers.o
-BUILTIN_OBJS += builtin/log.o
-BUILTIN_OBJS += builtin/ls-files.o
-BUILTIN_OBJS += builtin/ls-remote.o
-BUILTIN_OBJS += builtin/ls-tree.o
-BUILTIN_OBJS += builtin/mailinfo.o
-BUILTIN_OBJS += builtin/mailsplit.o
-BUILTIN_OBJS += builtin/merge-base.o
-BUILTIN_OBJS += builtin/merge-file.o
-BUILTIN_OBJS += builtin/merge-index.o
-BUILTIN_OBJS += builtin/merge-ours.o
-BUILTIN_OBJS += builtin/merge-recursive.o
-BUILTIN_OBJS += builtin/merge-tree.o
-BUILTIN_OBJS += builtin/merge.o
-BUILTIN_OBJS += builtin/mktag.o
-BUILTIN_OBJS += builtin/mktree.o
-BUILTIN_OBJS += builtin/multi-pack-index.o
-BUILTIN_OBJS += builtin/mv.o
-BUILTIN_OBJS += builtin/name-rev.o
-BUILTIN_OBJS += builtin/notes.o
-BUILTIN_OBJS += builtin/pack-objects.o
-BUILTIN_OBJS += builtin/pack-redundant.o
-BUILTIN_OBJS += builtin/pack-refs.o
-BUILTIN_OBJS += builtin/patch-id.o
-BUILTIN_OBJS += builtin/prune-packed.o
-BUILTIN_OBJS += builtin/prune.o
-BUILTIN_OBJS += builtin/pull.o
-BUILTIN_OBJS += builtin/push.o
-BUILTIN_OBJS += builtin/range-diff.o
-BUILTIN_OBJS += builtin/read-tree.o
-BUILTIN_OBJS += builtin/rebase.o
-BUILTIN_OBJS += builtin/receive-pack.o
-BUILTIN_OBJS += builtin/reflog.o
-BUILTIN_OBJS += builtin/remote-ext.o
-BUILTIN_OBJS += builtin/remote-fd.o
-BUILTIN_OBJS += builtin/remote.o
-BUILTIN_OBJS += builtin/repack.o
-BUILTIN_OBJS += builtin/replace.o
-BUILTIN_OBJS += builtin/rerere.o
-BUILTIN_OBJS += builtin/reset.o
-BUILTIN_OBJS += builtin/rev-list.o
-BUILTIN_OBJS += builtin/rev-parse.o
-BUILTIN_OBJS += builtin/revert.o
-BUILTIN_OBJS += builtin/rm.o
-BUILTIN_OBJS += builtin/send-pack.o
-BUILTIN_OBJS += builtin/shortlog.o
-BUILTIN_OBJS += builtin/show-branch.o
-BUILTIN_OBJS += builtin/show-index.o
-BUILTIN_OBJS += builtin/show-ref.o
-BUILTIN_OBJS += builtin/sparse-checkout.o
-BUILTIN_OBJS += builtin/stash.o
-BUILTIN_OBJS += builtin/stripspace.o
-BUILTIN_OBJS += builtin/submodule--helper.o
-BUILTIN_OBJS += builtin/symbolic-ref.o
-BUILTIN_OBJS += builtin/tag.o
-BUILTIN_OBJS += builtin/unpack-file.o
-BUILTIN_OBJS += builtin/unpack-objects.o
-BUILTIN_OBJS += builtin/update-index.o
-BUILTIN_OBJS += builtin/update-ref.o
-BUILTIN_OBJS += builtin/update-server-info.o
-BUILTIN_OBJS += builtin/upload-archive.o
-BUILTIN_OBJS += builtin/upload-pack.o
-BUILTIN_OBJS += builtin/var.o
-BUILTIN_OBJS += builtin/verify-commit.o
-BUILTIN_OBJS += builtin/verify-pack.o
-BUILTIN_OBJS += builtin/verify-tag.o
-BUILTIN_OBJS += builtin/worktree.o
-BUILTIN_OBJS += builtin/write-tree.o
 
 # THIRD_PARTY_SOURCES is a list of patterns compatible with the
 # $(filter) and $(filter-out) family of functions. They specify source
@@ -2222,7 +2101,7 @@ git.sp git.s git.o: EXTRA_CPPFLAGS = \
 	'-DGIT_MAN_PATH="$(mandir_relative_SQ)"' \
 	'-DGIT_INFO_PATH="$(infodir_relative_SQ)"'
 
-git$X: git.o GIT-LDFLAGS $(BUILTIN_OBJS) $(GITLIBS)
+git$X: git.o GIT-LDFLAGS $(GITLIBS)
 	$(QUIET_LINK)$(CC) $(ALL_CFLAGS) -o $@ $(ALL_LDFLAGS) \
 		$(filter %.o,$^) $(LIBS)
 
@@ -2451,7 +2330,6 @@ TEST_OBJS := $(patsubst %$X,%.o,$(TEST_PROGRAMS)) $(patsubst %,t/helper/%,$(TEST
 test-objs: $(TEST_OBJS)
 
 GIT_OBJS += $(LIB_OBJS)
-GIT_OBJS += $(BUILTIN_OBJS)
 GIT_OBJS += common-main.o
 GIT_OBJS += git.o
 .PHONY: git-objs
@@ -3403,7 +3281,7 @@ FUZZ_CXXFLAGS ?= $(CFLAGS)
 .PHONY: fuzz-all
 
 $(FUZZ_PROGRAMS): all
-	$(QUIET_LINK)$(CXX) $(FUZZ_CXXFLAGS) $(LIB_OBJS) $(BUILTIN_OBJS) \
+	$(QUIET_LINK)$(CXX) $(FUZZ_CXXFLAGS) $(LIB_OBJS) \
 		$(XDIFF_OBJS) $(EXTLIBS) git.o $@.o $(LIB_FUZZING_ENGINE) -o $@
 
 fuzz-all: $(FUZZ_PROGRAMS)
